@@ -1,0 +1,49 @@
+﻿@model List<MVCTreeSP.Models.Node>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ShowTree</title>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm())
+        {
+
+            @Html.Partial("_ShowTree", new MVCTreeSP.Models.Node())
+
+        }
+        <table border="1">
+            <tr>
+                <th>NodeId</th>
+                <th>NodeName</th>
+                <th>ParentNodeId</th>
+                <th>IsActive</th>
+                <th>StartDate</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.NodeId</td>
+                    <td>@item.NodeName</td>
+                    <td>@item.ParentNodeId</td>
+                    <td>@item.IsActive</td>
+                    <td>@item.StartDate</td>
+                    <td>
+                        @Html.ActionLink("Edit", "EditTree", new { NodeId = item.NodeId })
+                    </td>
+                    <td>
+                        @Html.ActionLink("Delete", "DeleteTree", new { NodeId = item.NodeId })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,19 @@
+﻿@model List<MVCTreeSP.Models.Node>
+
+@helper RenderTree(List<MVCTreeSP.Models.Node> nodes)
+{
+    if (nodes != null && nodes.Any())
+    {
+        <ul>
+            @foreach (var node in nodes)
+            {
+                <li>
+                    @node.NodeName
+                    @RenderTree(node.Children)
+                </li>
+            }
+        </ul>
+    }
+}
+
+@RenderTree(Model)

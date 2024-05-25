@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Database2ModelStoreContainer" CdmEntityContainer="Database2Entities">
+    <EntitySetMapping Name="Nodes">
+      <EntityTypeMapping TypeName="Database2Model.Node">
+        <MappingFragment StoreEntitySet="Node">
+          <ScalarProperty Name="NodeId" ColumnName="NodeId" />
+          <ScalarProperty Name="NodeName" ColumnName="NodeName" />
+          <ScalarProperty Name="ParentNodeId" ColumnName="ParentNodeId" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GetActiveNodes" FunctionName="Database2Model.Store.GetActiveNodes">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Database2Model.GetActiveNodes_Result">
+          <ScalarProperty Name="NodeId" ColumnName="NodeId" />
+          <ScalarProperty Name="NodeName" ColumnName="NodeName" />
+          <ScalarProperty Name="ParentNodeId" ColumnName="ParentNodeId" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_InsertTree" FunctionName="Database2Model.Store.sp_InsertTree" />
+    <FunctionImportMapping FunctionImportName="sp_ShowTree" FunctionName="Database2Model.Store.sp_ShowTree">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Database2Model.sp_ShowTree_Result">
+          <ScalarProperty Name="NodeId" ColumnName="NodeId" />
+          <ScalarProperty Name="NodeName" ColumnName="NodeName" />
+          <ScalarProperty Name="ParentNodeId" ColumnName="ParentNodeId" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_UpdateTree" FunctionName="Database2Model.Store.sp_UpdateTree" />
+  </EntityContainerMapping>
+</Mapping>

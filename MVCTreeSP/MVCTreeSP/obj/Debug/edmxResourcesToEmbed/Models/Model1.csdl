@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Database2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Node">
+    <Key>
+      <PropertyRef Name="NodeId" />
+    </Key>
+    <Property Name="NodeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NodeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ParentNodeId" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+  </EntityType>
+  <EntityContainer Name="Database2Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Nodes" EntityType="Self.Node" />
+    <FunctionImport Name="GetActiveNodes" ReturnType="Collection(Database2Model.GetActiveNodes_Result)" />
+    <FunctionImport Name="sp_InsertTree">
+      <Parameter Name="NodeName" Mode="In" Type="String" />
+      <Parameter Name="ParentNodeId" Mode="In" Type="Int32" />
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_ShowTree" ReturnType="Collection(Database2Model.sp_ShowTree_Result)">
+      <Parameter Name="NodeId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdateTree">
+      <Parameter Name="NodeId" Mode="In" Type="Int32" />
+      <Parameter Name="NodeName" Mode="In" Type="String" />
+      <Parameter Name="ParentNodeId" Mode="In" Type="Int32" />
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="GetActiveNodes_Result">
+    <Property Type="Int32" Name="NodeId" Nullable="false" />
+    <Property Type="String" Name="NodeName" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="ParentNodeId" Nullable="false" />
+    <Property Type="DateTime" Name="StartDate" Nullable="false" />
+    <Property Type="Boolean" Name="IsActive" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="sp_ShowTree_Result">
+    <Property Type="Int32" Name="NodeId" Nullable="false" />
+    <Property Type="String" Name="NodeName" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="ParentNodeId" Nullable="false" />
+    <Property Type="Boolean" Name="IsActive" Nullable="false" />
+    <Property Type="DateTime" Name="StartDate" Nullable="false" />
+  </ComplexType>
+</Schema>
